@@ -14,10 +14,17 @@ const Customers = props => {
 				</tr>
 			</thead>
 			<tbody>
-				{customers.map((customer, idx) => {
+				{customers.length === 0 && (
+					<tr>
+						<td colSpan='3' className='text-center'>
+							No Customers Added
+						</td>
+					</tr>
+				)}
+				{customers.map(customer => {
 					return (
 						<tr
-							onClick={() => props.history.push(`/customer/${idx}`)}
+							onClick={() => props.history.push(`/customer/${customer._id}`)}
 							key={uuid()}
 						>
 							<td>{customer.name}</td>

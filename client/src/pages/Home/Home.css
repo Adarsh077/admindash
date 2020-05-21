@@ -1,6 +1,9 @@
 .table-hover {
 	cursor: pointer;
 }
-.table td {
+.card-title {
 	vertical-align: middle !important;
+	-ms-user-select: text; /* IE 10+ and Edge */
+	-webkit-user-select: text; /* Safari */
+	user-select: all; /* Standard syntax */
 }

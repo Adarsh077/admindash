@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Input from '../components/Input';
 import { Link } from 'react-router-dom';
-import LoadingBtn from '../components/LoadingBtn';
 import Axios from '../services/Axios';
+import LoadingBtn from '../components/LoadingBtn';
 
 function validateEmail(email) {
 	var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -14,7 +14,10 @@ const validate = data => {
 	if (!data.email) errors.email = 'Email is required.';
 	if (data.email && !validateEmail(data.email))
 		errors.email = 'Enter valid email address';
-	if (!data.password) errors.password = 'Password is required.';
+	if (!data.password && !data.confirmPassword)
+		errors.password = 'Password is required.';
+	if (!data.password !== !data.confirmPassword)
+		errors.password = 'Passwords do not match.';
 	return errors;
 };
 
@@ -24,13 +27,14 @@ export default class extends Component {
 		this.state = {
 			email: '',
 			password: '',
-			isLoading: false,
+			confirmPassword: '',
 			errors: {},
+			isLoading: false,
 		};
 	}
 
 	handleChange = e => {
-		const { name, value } = e.target;
+		const { value, name } = e.target;
 		this.setState({ [name]: value });
 	};
 
@@ -40,7 +44,7 @@ export default class extends Component {
 		if (Object.keys(errors).length > 0) return this.setState({ errors });
 
 		this.setState({ isLoading: true, errors: {} });
-		Axios.get('/login', { params: this.state })
+		Axios.post('/register', this.state)
 			.then(({ data }) => {
 				if (data.err) {
 					return this.setState({ errors: data.err, isLoading: false });
@@ -54,23 +58,23 @@ export default class extends Component {
 	};
 
 	render() {
-		const { email, errors, isLoading, password } = this.state;
+		const { confirmPassword, email, errors, password, isLoading } = this.state;
 		return (
-			<div className='row mt-5 mx-auto'>
-				<div className='col-12 col-md-6 col-lg-4 mx-auto'>
+			<div className='row mt-5'>
+				<div className='col-12 col-md-6 col-lg-4 m-auto'>
 					<form
 						noValidate
 						className='text-center border border-light p-5'
 						onSubmit={this.handleSubmit}
 					>
-						<p className='h4 mb-4'>Login</p>
+						<p className='h4 mb-4'>Register</p>
 						<Input
 							type='email'
 							name='email'
 							value={email}
 							onChange={this.handleChange}
 							err={errors.email}
-							placeholder='E-mail'
+							placeholder='E-Mail'
 							autoFocus
 						/>
 						<Input
@@ -81,16 +85,26 @@ export default class extends Component {
 							err={errors.password}
 							placeholder='Password'
 						/>
+						<Input
+							type='password'
+							name='confirmPassword'
+							value={confirmPassword}
+							onChange={this.handleChange}
+							err={errors.password}
+							placeholder='Confirm Password'
+						/>
+
 						{isLoading ? (
 							<LoadingBtn className='my-4' />
 						) : (
 							<button className='btn btn-info btn-block my-4' type='submit'>
-								Login
+								Register
 							</button>
 						)}
+
 						<p>
-							Not a user?
-							<Link to='/register'> Register</Link>
+							Already a user?
+							<Link to='/login'> Login</Link>
 						</p>
 					</form>
 				</div>

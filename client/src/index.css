@@ -1,0 +1,20 @@
+.invalid-feedback {
+	text-align: left;
+}
+.invalid-gender {
+	margin-top: 0.25rem;
+	font-size: 80%;
+	color: #dc3545;
+	font-weight: 300;
+}
+.address-row .action {
+	opacity: 1;
+}
+
+.address-row:hover .action {
+	opacity: 1;
+}
+.address-col {
+	max-width: 200px;
+	word-wrap: break-word;
+}
