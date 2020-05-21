@@ -17,6 +17,7 @@ Router.post("/", (req, res, next) => {
       res.send({ token });
     })
     .catch((err) => {
+      console.log(err);
       if (err.code === 11000)
         return res.send({ err: { email: "Email is already registered." } });
       next(err, req, res);

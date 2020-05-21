@@ -19,5 +19,6 @@ Router.use((req, res, next) => {
 });
 
 Router.use("/customer", require("./customer"));
+Router.use("/address", require("./address"));
 
 module.exports = Router;

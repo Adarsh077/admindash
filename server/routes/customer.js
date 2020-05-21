@@ -40,21 +40,6 @@ Router.post("/", (req, res, next) => {
     .catch(next);
 });
 
-/* Edit Customer */
-Router.put("/:customerid", (req, res, next) => {
-  const errors = validateCustomer(req.body);
-  if (Object.keys(errors).length > 0) return res.send({ err: errors });
-
-  const { customerid } = req.params;
-  AdminDoc.findOneAndUpdate(
-    { _id: req.adminid, "customers._id": customerid },
-    { "customers.$": req.body },
-    { new: true }
-  )
-    .then((admin) => res.send(admin))
-    .catch(next);
-});
-
 /* Delete Customer */
 Router.delete("/:customerid", (req, res, next) => {
   const { customerid } = req.params;
