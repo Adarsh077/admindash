@@ -20,6 +20,7 @@ Router.get("/", (req, res, next) => {
     "customers.name": 1,
     "customers.age": 1,
     "customers.gender": 1,
+    "customers._id": 1,
   })
     .then((admin) => res.send(admin))
     .catch(next);
