@@ -1,0 +1,15 @@
+.customer-img {
+  height: 100%;
+  cursor: pointer;
+  width: 100%;
+}
+h5 {
+  margin-bottom: 1rem !important;
+}
+
+.address-row .copy {
+  opacity: 0;
+}
+.address-row:hover .copy {
+  opacity: 1;
+}
