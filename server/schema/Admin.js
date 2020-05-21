@@ -20,6 +20,7 @@ const AdminSchema = mongoose.Schema({
   email: {
     type: String,
     required: true,
+    unique: [true, "Email is already registered"],
   },
   password: {
     type: String,
