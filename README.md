@@ -2,12 +2,6 @@
 
 A simple Customer Address managment React App.
 
-**Live website :**  
-https://admindash-react.netlify.app/customers
-
-> Note: Website may be slow since the backend is hosted on heroku.
-
-
 **Technologies used:**
 
 Front End: 
