@@ -1,7 +1,6 @@
 import Axios from 'axios';
 
-Axios.defaults.baseURL =
-	'https://admindash-server.herokuapp.com/';
+Axios.defaults.baseURL = 'http://localhost:8080';
 
 const setToken = token => {
 	Axios.defaults.headers['x-access-token'] = token;
